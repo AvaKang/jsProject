@@ -1,0 +1,37 @@
+
+  body{margin:0; padding:0;}
+
+  h1 {margin:0; color:#fff}
+
+  .fs-18 {font-size:18px;}
+
+  .mt-20 {margin-top:20px;}
+  .mb-10 {margin-bottom:10px;}
+
+  .text-c {text-align:center;}
+
+  @keyframes count-Down {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+    #animate-number {
+    font-size:50px;
+    color:#fff;
+    font-weight:bold;
+    animation: count-Down .6s ease-out infinite;
+  }
+  .section {
+    background: url(./bg.jpg)no-repeat center;
+    background-size: cover;
+    padding: 7px;
+    box-sizing: border-box;
+    color:#fff;
+  }
+  .inner {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 25px 0 20px;
+}
