@@ -26,9 +26,50 @@
 
 let taskInput = document.getElementById('task-input');
 let addButton = document.getElementById('add-button');
+let tabs = document.querySelectorAll('.task-tabs div');
 let taskList = []; // 할일 아이템을 배열로 추가
+let mode = 'all'; //mode는 전역변수로 처음 초기값은 all로 한다.
+let filterList = []; //진행중 아이템 필터하여 배열로 추가
+let tabsUnderLine = document.getElementById('under-line');
+
+//+버튼 클릭하면 addTask 함수실행
 addButton.addEventListener('click', addTask);
 
+//탭 메뉴 클릭하면 tabsIndicatore 함수실행
+tabs.forEach(menu => menu.addEventListener('click',(e) => tabsIndicatore(e)));
+
+//탭 메뉴 클릭하면 언더라인 위치 설정
+function tabsIndicatore(e) {
+	tabsUnderLine.style.left = e.currentTarget.offsetLeft + 'px';
+	tabsUnderLine.style.width = e.currentTarget.offsetWidth + 'px';
+	tabsUnderLine.style.top = e.currentTarget.offsetTop + e.currentTarget.offsetHeight -4 + 'px';
+
+	//현재 클릭한 탭에만 'on' 클래스를 추가한다.
+	e.currentTarget.classList.add('on');
+	//다른 탭에 'on' 클래스를 제거한다.
+	tabs.forEach(tab => {
+		if(tab !== e.currentTarget) {
+			tab.classList.remove('on');
+		}
+	})
+}
+
+
+//Enter버튼 클릭하면 자동으로 아이템 추가하기 (참조 검색어:How to add enter event javascript)
+taskInput.addEventListener('keypress', (event) => {
+	if(event.key == 'Enter'){
+		event.preventDefault(); // 폼 제출 방지
+		addTask(); //enter 키를 눌렸을 때 실행할 동작
+	}
+});
+
+for(let i = 1; i < tabs.length; i++) {
+	tabs[i].addEventListener('click', function(event){
+		filter(event);
+	});
+}
+
+//할일 추가할 정보
 function addTask() {
 	//let taskContent = taskInput.value;
 	let task = {
@@ -36,28 +77,38 @@ function addTask() {
 		taskContent: taskInput.value,
 		isComplete: false
 	}
-	console.log(task);
+	//console.log(task);
 	taskList.push(task);
 	render();
 }
 
 function render() {
+	//1. 내가 선택한 탭에 따라서
+	let list = [];
+	if(mode === 'all'){
+		//all taskList의 보여준다.
+		list = taskList;
+	} else if(mode === 'ongoing' || mode ==='done') {
+		//ongoing, done의 filterList 보여준다.
+		list = filterList;
+	}
+
 	let resultHtml = '';
-	for(let i = 0; i < taskList.length; i++) { //할일 아이템을 하나하나 꺼내서 무엇을 하려고 하는구나!
-		if(taskList[i].isComplete == true){
+	for(let i = 0; i < list.length; i++) { //할일 아이템을 하나하나 꺼내서 무엇을 하려고 하는구나!
+		if(list[i].isComplete == true){
 			resultHtml += `<div class="task on">
-			<div class="task-text task-done">${taskList[i].taskContent}</div>
+			<div class="task-text task-done">${list[i].taskContent}</div>
 			<div class="task-button-wrap">
-				<button onclick="toggleComplete('${taskList[i].id}')" class="check-button"></button>
-				<button onclick="deleteTask('${taskList[i].id}')" class="delete-button"></button>
+				<button onclick="toggleComplete('${list[i].id}')" class="check-button"></button>
+				<button onclick="deleteTask('${list[i].id}')" class="delete-button"></button>
 			</div>
 		</div>`;
 		} else {
 			resultHtml += `<div class="task">
-				<div class="task-text">${taskList[i].taskContent}</div>
+				<div class="task-text">${list[i].taskContent}</div>
 				<div class="task-button-wrap">
-					<button onclick="toggleComplete('${taskList[i].id}')" class="check-button"></button>
-					<button onclick="deleteTask('${taskList[i].id}')" class="delete-button"></button>
+					<button onclick="toggleComplete('${list[i].id}')" class="check-button"></button>
+					<button onclick="deleteTask('${list[i].id}')" class="delete-button"></button>
 				</div>
 			</div>`;
 		}
@@ -67,8 +118,8 @@ function render() {
 	document.getElementById('task-board').innerHTML = resultHtml;
 }
 
+//어떤 아이템을 선택했는지 알려주는 함수실행
 function toggleComplete(id) {
-	//어떤 아이템을 선택했는지 알려줘야함
 	console.log('id:', id);
 	for(let i = 0; i < taskList.length; i++){
 		if(taskList[i].id == id) { //taskList의 i번째 있는 id가 매개변수로 받은 id와 같다면
@@ -82,13 +133,55 @@ function toggleComplete(id) {
 
 //삭제 버튼 클릭 함수
 function deleteTask(id) {
+	//할일 배열에서 아이템 삭제
 	for(let i = 0; i < taskList.length; i++) {
 		if(taskList[i].id == id){ //만약 taskList에i번째 있는 id가 내가 뽑은 id와 같다면
 			taskList.splice(i, 1) //taskList에 i번째 있는 아이템에 1개만 삭제하겠다.
 			break; //탈출
 		}
 	}
-	render(); //★★★값을 업데이트 해주면 ui도 업데이트 해줘야한다
+
+	//필터된 배열에서 아이템 삭제
+	for(let i = 0; i < filterList.length; i++) {
+		if(filterList[i].id == id){ //만약 filterList에i번째 있는 id가 내가 뽑은 id와 같다면
+			filterList.splice(i, 1) //filterList에 i번째 있는 아이템에 1개만 삭제하겠다.
+			break; //탈출
+		}
+	}
+	console.log('삭제',deleteTask);
+	render(); //★값을 업데이트 해주면 ui도 업데이트 해줘야한다
+}
+
+function filter(event){
+	//console.log(event.target);
+	//console.log("filter", event.target.className); //class로 target 하는 방법
+	mode = event.target.id;
+	filterList = [];
+
+	if(mode === 'all') {
+		//전체 리스트를 보여준다.
+		render();
+	} else if(mode === 'ongoing') {
+		//진행중인 아이템을 보여준다.
+		//task.isComplete = false
+		for(let i = 0; i < taskList.length; i++){
+			if(taskList[i].isComplete === false){
+				filterList.push(taskList[i]);
+			}
+		}
+		render();
+		console.log('진행중', filterList);
+	} else if (mode === 'done'){
+		//끝나는 케이스
+		//task.isComplete = true
+		for(let i =0; i < taskList.length; i++){
+			if(taskList[i].isComplete === true){
+				filterList.push(taskList[i]);
+			}
+		}
+		render();
+
+	}
 }
 
 //id값 부여 함수
@@ -96,3 +189,4 @@ function randomIDGenerate(){
 	//함수의 결과물이 다른곳에서 사용할 경우 return이 필요하다.
 	return '_' + Math.random().toString(36).substr(2, 9)
 }
+

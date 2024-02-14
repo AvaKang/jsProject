@@ -1,1 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0H284.2c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64S14.3 32 32 32h96l7.2-14.3zM32 128H416V448c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96 64c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z"/></svg>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 28.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Ready" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 100 100" style="enable-background:new 0 0 100 100;" xml:space="preserve">
+<style type="text/css">
+	.st0{opacity:0.15;fill:#AF124A;}
+	.st1{fill:#F41D69;}
+</style>
+<rect x="0" class="st0" width="100" height="100"/>
+<g>
+	<path class="st1" d="M80.3,30.9h-5.7H64v-3.3c0-6-4.9-10.8-10.8-10.8h-6.4c-6,0-10.8,4.9-10.8,10.8v3.3H25.4h-5.7v7h5.7v35.2
+		c0,5.6,4.6,10.2,10.2,10.2h28.8c5.6,0,10.2-4.6,10.2-10.2V37.9h5.7V30.9z M43,27.6c0-2.1,1.7-3.8,3.8-3.8h6.4
+		c2.1,0,3.8,1.7,3.8,3.8v3.3H43V27.6z M67.6,73.1c0,1.7-1.4,3.2-3.2,3.2H35.6c-1.7,0-3.2-1.4-3.2-3.2V37.9H36H64h3.6V73.1z"/>
+	<rect x="39.5" y="48" class="st1" width="7" height="18.1"/>
+	<rect x="53.5" y="48" class="st1" width="7" height="18.1"/>
+</g>
+</svg>

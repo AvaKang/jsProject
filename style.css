@@ -1,45 +1,81 @@
 body {
   margin:0;
-  background-image: url('./images/background.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
+  background-image: url('./images/bg.png');
+  background-size: 100%;
+  background-position: bottom;
+  color:#333
 }
 
 .container {
   background-color:#fff;
-  min-height:100vh;
+  width:100%;
+  min-height:95vh;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding:1em;
+  border-radius: 1em;;
+  transition: .3s;
 }
 
-.task-area {
-  border:1px solid lightgray;
-}
 .task-tabs {
   display:flex;
   position:relative;
-  border-bottom:1px solid lightgray;
 }
+
 .task-tabs div {
   padding: 1em;
+  position:relative;
+}
+.task-tabs div:nth-child(2)::after, .task-tabs div:nth-child(3)::after {
+  content:'';
+  width:1px;
+  height:10px;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translate(0, -50%);
+  background: lightgray;
+}
+
+.task-tabs div.on {
+  color:#4e7efb;
+  font-weight:bold;
+  transition: .4s;;
 }
 
 #under-line {
   height:4px;
-  background-color: pink;
+  background-color: #4e7efb;
   position: absolute;
-  width: 80px;
+  width: 64px;
   left:0;
-  top:52px;
+  top:100%;
   padding:0;
+  transition: 0.4s;
+}
+
+#task-board {
+  margin-top:2em;
+  max-height: clac(100vh);
+  height: calc(100vh - 270px);
+  overflow-y: auto;
 }
 
 .task {
   display:flex;
   justify-content: space-between;
+  box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+  margin-bottom: 0.7rem;
+  border-radius: 0.5em;
+  overflow:hidden;
 }
 
 .task.on {
-  background-color: lightgray;
+  background-color: #f7f7f7;
+  color:lightgrey
 }
 
 .task-done {
@@ -71,11 +107,79 @@ body {
 }
 
 .delete-button {
-  background-image: url('./images/trash-can-solid.svg');
+  background-image: url('./images/delete.png');
   background-repeat: no-repeat;
+  background-size: 100%;
+  background-color: #fff;
   width:20px;
   height:20px;
   padding:0;
   border:0;
   margin-left:10px;
+}
+
+.task-tabs div {
+  cursor: pointer;
+}
+
+.input-area {
+  display: flex;
+  justify-content: space-between;
+  margin-top:1.2em
+}
+
+#task-input {
+  height:3em;
+  border:2px solid #4e7efb;
+  border-right:none;
+  width:100%;
+  padding:0 1em;
+  outline: none;
+}
+#add-button {
+  background-color: #4e7efb;
+  color: #fff;
+  border: none;
+  padding: 0 0.5em;
+  font-size: 2em;
+}
+
+h1 {
+  font-size: 2em;
+  font-weight: bold;
+  color: #3a3a3a;
+}
+
+
+/* phone*/
+@media (max-width:600px) {
+  .container {
+    width:90%;
+  }
+}
+
+/* tablet */
+@media (min-width:600px) and (max-width:992px) {
+  .container {
+  }
+}
+
+/* desktop */
+@media (min-width:992px){
+
+}
+
+/* 해상도에 상관 없이 가로가 세로보다 긴 경우 */
+@media (orientation:landscape){
+
+}
+
+/* 해상도에 상관 없이 세로가 가로보다 긴 경우 */
+@media (orientation:portrait){
+
+}
+
+/* 프린트 될 화면에 스타일 줄 경우 */
+@media print {
+
 }
