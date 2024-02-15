@@ -71,6 +71,10 @@ for(let i = 1; i < tabs.length; i++) {
 
 //할일 추가할 정보
 function addTask() {
+	if(taskInput.value === ''){
+		alert('할일을 입력해주세요');	
+		return; // 빈 값이면 함수 종료
+	}
 	//let taskContent = taskInput.value;
 	let task = {
 		id: randomIDGenerate(),
@@ -83,6 +87,9 @@ function addTask() {
 }
 
 function render() {
+	//할일 입력 후 입력창 자동으로 비워지게
+	taskInput.value = '';
+
 	//1. 내가 선택한 탭에 따라서
 	let list = [];
 	if(mode === 'all'){
